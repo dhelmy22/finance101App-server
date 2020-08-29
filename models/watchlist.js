@@ -12,8 +12,12 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: true
       },
-      typeOfSesurity: {
+      typeOfSecurity: {
         type: DataTypes.STRING,
+        allowNull: true,
+      },
+      userId: {
+        type: DataTypes.INTEGER,
         allowNull: true,
       },
      

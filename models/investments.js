@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const Invest = sequelize.define("invest", {
+    const Investments = sequelize.define("investments", {
       // id: {
       //   type: DataTypes.INTEGER,
       //   primaryKey: true
@@ -12,11 +12,15 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: true
       },
-      typeOfSesurity: {
-        type: DataTypes.STRING,
+      quantity: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      userId: {
+        type: DataTypes.INTEGER,
         allowNull: true,
       },
      
     });
-    return Invest;
+    return Investments;
   };

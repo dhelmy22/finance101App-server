@@ -12,10 +12,10 @@ const Watchlist = require("../db").import("../models/watchlist");
 // - Watchlist Create ---------------------------------------------
 router.post("/create", validateSession, (req, res) => {
     const watchlistEntry = {
-        // id: req.body.plant.id,
         title: req.body.watchlist.title,
         price: req.body.watchlist.price,
-        typeOfSecurity: req.body.watchlist.typeOfSecurity
+        typeOfSecurity: req.body.watchlist.typeOfSecurity,
+        userId: req.user.id
 
     }
     Watchlist.create(watchlistEntry)
@@ -48,9 +48,9 @@ router.get('/', (req, res) => {
 // - Get Watchlist by User -------------------------------------------
 
 router.get('/mine', validateSession, (req, res) => {
-    let userId = req.user.id
+    let user = req.user.id
     Watchlist.findAll({
-        where: { owner: userId }
+        where: { userId: user}
     })
         .then((watchlist) => res.status(200).json(watchlist))
         .catch((err) => res.status(500).json({ error: err }));

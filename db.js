@@ -16,4 +16,16 @@ function(err){
 }
 
 );
+
+User = sequelize.import('./models/user');
+Investments = sequelize.import('./models/investments');
+Watchlist = sequelize.import('./models/watchlist'),
+
+User.hasMany(Investments);
+Investments.belongsTo(User);
+User.hasMany(Watchlist);
+Watchlist.belongsTo(User);
+
+
+
 module.exports = sequelize;

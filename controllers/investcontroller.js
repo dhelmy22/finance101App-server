@@ -12,13 +12,13 @@ const Investments = require("../db").import("../models/investments");
 // - Investment Create ---------------------------------------------
 router.post("/create", validateSession, (req, res) => {
     const investmentsEntry = {
-        // id: req.body.plant.id,
-        title: req.body.watchlist.title,
-        price: req.body.watchlist.price,
-        quantity: req.body.watchlist.quantity
+        title: req.body.investments.title,
+        price: req.body.investments.price,
+        quantity: req.body.investments.quantity,
+        userId: req.user.id
 
     }
-    Investments.create(invesmentsEntry)
+    Investments.create(investmentsEntry)
         .then((investments) => res.status(200).json(investments))
         .catch((err) => res.status(500).json({ error: err }));
 });
@@ -27,9 +27,9 @@ router.post("/create", validateSession, (req, res) => {
 router.post("/save", validateSession, (req, res) => {
     const investmentsEntry = {
         id: req.body.user.id,
-        title: req.body.watchlist.title,
-        price: req.body.watchlist.price,
-        quantity: req.body.watchlist.quantity
+        title: req.body.investments.title,
+        price: req.body.investments.price,
+        quantity: req.body.investments.quantity
 
     }
     Investments.create(investmentsEntry)
@@ -50,7 +50,7 @@ router.get('/', (req, res) => {
 router.get('/mine', validateSession, (req, res) => {
     let userId = req.user.id
     Investments.findAll({
-        where: { owner: userId }
+        where: { userId: userId }
     })
         .then((investments) => res.status(200).json(investments))
         .catch((err) => res.status(500).json({ error: err }));
@@ -72,9 +72,9 @@ router.get('/title', function (req, res) {
 
 router.put('/update/:title', validateSession, function (req, res) {
     const updateInvestmentsEntry = {
-        title: req.body.watchlist.title,
-        price: req.body.watchlist.price,
-        quantity: req.body.watchlist.quantity
+        title: req.body.investments.title,
+        price: req.body.investments.price,
+        quantity: req.body.investments.quantity
     };
     const query = { where: { id: req.params.title, owner: req.user.id } };
 
