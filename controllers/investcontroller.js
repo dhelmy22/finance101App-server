@@ -76,7 +76,7 @@ router.put('/update/:title', validateSession, function (req, res) {
         price: req.body.investments.price,
         quantity: req.body.investments.quantity
     };
-    const query = { where: { id: req.params.title, owner: req.user.id } };
+    const query = { where: { id: req.params.title, userId: req.user.id } };
 
     Investments.update(updateInvestmentsEntry, query)
         .then((investments) => res.status(200).json(investments))
@@ -86,7 +86,7 @@ router.put('/update/:title', validateSession, function (req, res) {
 // - Deleting Entry -------------------------------------------
 
 router.delete('/delete/:title', validateSession, function (req, res) {
-    const query = { where: { title: req.params.title, owner: req.user.id } };
+    const query = { where: { title: req.params.title, userId: req.user.id } };
 
     Investments.destroy(query)
         .then(() => res.status(200).json({ message: 'Removed' }))

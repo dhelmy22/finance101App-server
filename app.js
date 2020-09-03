@@ -15,6 +15,7 @@ sequelize.sync();
 // sequelize.sync(force: true);
 
 app.use(express.json());
+app.use(require('./middleware/headers'))
 // app.options('*', cors());
 app.use('/invest', invest);
 app.use('/user', user);
