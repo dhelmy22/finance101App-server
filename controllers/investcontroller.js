@@ -13,8 +13,8 @@ const Investments = require("../db").import("../models/investments");
 router.post("/create", validateSession, (req, res) => {
     const investmentsEntry = {
         title: req.body.investments.title,
-        price: req.body.investments.price,
-        quantity: req.body.investments.quantity,
+        price: parseInt(req.body.investments.price),
+        quantity: parseInt(req.body.investments.quantity),
         userId: req.user.id
 
     }

@@ -13,7 +13,7 @@ const Watchlist = require("../db").import("../models/watchlist");
 router.post("/create", validateSession, (req, res) => {
     const watchlistEntry = {
         title: req.body.watchlist.title,
-        price: req.body.watchlist.price,
+        price: parseInt(req.body.watchlist.price),
         typeOfSecurity: req.body.watchlist.typeOfSecurity,
         userId: req.user.id
 
