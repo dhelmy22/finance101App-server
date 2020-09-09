@@ -70,13 +70,13 @@ router.get('/title', function (req, res) {
 
 // - Update Entry ---------------------------------------------
 
-router.put('/update/:title', validateSession, function (req, res) {
+router.put('/update/:id', validateSession, function (req, res) {
     const updateInvestmentsEntry = {
         title: req.body.investments.title,
         price: req.body.investments.price,
         quantity: req.body.investments.quantity
     };
-    const query = { where: { id: req.params.title, userId: req.user.id } };
+    const query = { where: { id: req.params.id, userId: req.user.id } };
 
     Investments.update(updateInvestmentsEntry, query)
         .then((investments) => res.status(200).json(investments))
@@ -85,8 +85,8 @@ router.put('/update/:title', validateSession, function (req, res) {
 
 // - Deleting Entry -------------------------------------------
 
-router.delete('/delete/:title', validateSession, function (req, res) {
-    const query = { where: { title: req.params.title, userId: req.user.id } };
+router.delete('/delete/:id', validateSession, function (req, res) {
+    const query = { where: { id: req.params.id, userId: req.user.id } };
 
     Investments.destroy(query)
         .then(() => res.status(200).json({ message: 'Removed' }))
